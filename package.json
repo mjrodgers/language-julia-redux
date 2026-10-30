@@ -1,13 +1,48 @@
 {
   "name": "language-julia-redux",
   "version": "0.0.1",
-  "description": "Julia language support for Pulsar using modern-tree-sitter.",
-  "keywords": [],
-  "repository": "https://github.com/JuliaEditorSupport",
+  "description": "Julia language support for Pulsar, using the tree-sitter-julia parser (modern Tree-sitter).",
+  "keywords": [
+    "julia",
+    "tree-sitter",
+    "grammar"
+  ],
+  "repository": "https://github.com/mjrodgers/pulsar-language-julia",
   "main": "./lib/main",
   "license": "MIT",
   "engines": {
-    "atom": ">=0.174.0 <2.0.0"
+    "atom": ">=1.127.0 <2.0.0"
+  },
+  "atomTestRunner": "runners/jasmine2-test-runner",
+  "configSchema": {
+    "markdownInDocstrings": {
+      "title": "Highlight docstrings as Markdown",
+      "description": "Docstrings are Markdown; with this on they are highlighted as such, and only their quotes are coloured as a string (requires the bundled language-gfm package). Takes effect for files opened afterwards.",
+      "type": "boolean",
+      "default": true,
+      "order": 1
+    },
+    "juliaInDoctests": {
+      "title": "Highlight Julia in doctests and REPL examples",
+      "description": "In `jldoctest` and `julia-repl` code blocks (in docstrings and Markdown files), highlight the input after each `julia>` prompt as Julia, and mark the prompts. The output is left as it is. Takes effect for files opened afterwards.",
+      "type": "boolean",
+      "default": true,
+      "order": 2
+    },
+    "docstringBackground": {
+      "title": "Docstring background",
+      "description": "Give the lines of docstrings a faint background, to set them apart from code.",
+      "type": "boolean",
+      "default": true,
+      "order": 3
+    },
+    "docstringGuide": {
+      "title": "Docstring guide",
+      "description": "Draw a thin line down the left edge of docstrings.",
+      "type": "boolean",
+      "default": true,
+      "order": 4
+    }
   },
   "consumedServices": {
     "hyperlink.injection": {

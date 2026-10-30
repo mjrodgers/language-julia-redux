@@ -1,23 +1,32 @@
-name: 'Julia (WASM)'
+name: 'Julia'
 scopeName: 'source.julia'
 type: 'modern-tree-sitter'
 parser: 'tree-sitter-julia'
 
+# Lets other grammars embed Julia: ```julia code blocks in Markdown, and the
+# blocks Documenter.jl runs (```@example, ```@repl, ```@setup, ```@eval).
+injectionRegex: '^(julia|Julia|JULIA|jl|@example|@repl|@setup|@eval)$'
 
 fileTypes: [
   'jl'
 ]
-firstLineRegex:
-  # shebang line
-  '^#!.*\\bjulia\\s*$'
+
+firstLineRegex: [
+  # shebang line, e.g. `#!/usr/bin/env julia` or `#!/usr/bin/env -S julia --project`
+  '^#!.*\\bjulia\\b'
+
+  # vim modeline
+  'vim\\b.*\\bset\\b.*\\b(filetype|ft|syntax)=julia\\b'
+]
 
 treeSitter:
+  # tree-sitter-julia v0.25.0, which tree-sitter-julia.wasm was built from.
+  parserSource: 'github:tree-sitter/tree-sitter-julia#e0f9dcd180fdcfcfa8d79a3531e11d99e79321d3'
   grammar: 'tree-sitter-julia/tree-sitter-julia.wasm'
   highlightsQuery: 'tree-sitter-julia/highlights.scm'
-  tagsQuery: 'tree-sitter-julia/tags.scm'
-  # localsQuery: 'tree-sitter-julia/locals.scm'
   foldsQuery: 'tree-sitter-julia/folds.scm'
   indentsQuery: 'tree-sitter-julia/indents.scm'
+  tagsQuery: 'tree-sitter-julia/tags.scm'
 
 comments:
   start: '# '

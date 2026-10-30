@@ -1,0 +1,19 @@
+// Docstring lines in Julia files (marked by lib/docstrings.js). Colours are
+// derived from the syntax theme, so they work on light and dark themes alike.
+// Override them in your own stylesheet (Edit › Stylesheet…) if you like.
+@import "syntax-variables";
+
+atom-text-editor .line.julia-docstring-background {
+  background-color: fade(@syntax-text-color, 4%);
+}
+
+// A thin guide down the left edge of the docstring.
+atom-text-editor .line.julia-docstring-guide {
+  box-shadow: inset 2px 0 0 fade(@syntax-text-color, 22%);
+}
+
+// `julia>` prompts in jldoctest / julia-repl examples, green like the REPL's.
+atom-text-editor .julia-repl-prompt {
+  color: @syntax-color-added;
+  font-weight: bold;
+}
