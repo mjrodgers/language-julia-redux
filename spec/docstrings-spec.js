@@ -183,4 +183,18 @@ describe('Julia docstrings', () => {
     const rows = lines.ranges().map((range) => [range.start.row, range.end.row]);
     expect(rows).toEqual([[0, 4], [7, 9]]);
   });
+
+  it('leaves the line markers alone when an edit changes no docstring', async () => {
+    const lines = main.docstringLines.get(editor);
+    await lines.update();
+    const before = lines.markers.getMarkers().map((marker) => marker.id);
+    editor.setTextInBufferRange([[5, 8], [5, 8]], ' + 1');   // in code: the docstrings stay where they are
+    await languageMode.atTransactionEnd();
+    await lines.update();
+    expect(lines.markers.getMarkers().map((marker) => marker.id)).toEqual(before);
+    editor.setTextInBufferRange([[9, 0], [9, 0]], 'More.\n'); // inside a docstring: its marker covers the new line
+    await languageMode.atTransactionEnd();
+    await lines.update();
+    expect(lines.ranges().map((range) => [range.start.row, range.end.row])).toEqual([[0, 4], [7, 10]]);
+  });
 });
