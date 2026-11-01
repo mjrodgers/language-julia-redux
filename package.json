@@ -42,6 +42,13 @@
       "type": "boolean",
       "default": true,
       "order": 4
+    },
+    "detectIndentation": {
+      "title": "Detect indentation",
+      "description": "When a Julia file opens, use the indentation its code blocks use (2 or 4 spaces, or tabs) for that file, when it clearly uses one; otherwise your settings apply (4 spaces by default). Only the bodies of `function`, `if`, `for` and other blocks are measured, so lined-up arguments and docstrings do not confuse it. Skipped while the `editorconfig` package is active, which then decides.",
+      "type": "boolean",
+      "default": true,
+      "order": 5
     }
   },
   "consumedServices": {

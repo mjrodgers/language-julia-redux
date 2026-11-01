@@ -33,6 +33,7 @@ If the old `language-julia` package is also installed, Pulsar uses this grammar 
 - **Highlight docstrings as Markdown** (on by default). Turn it off to show docstrings as plain strings. Reopen open files after changing it.
 - **Highlight Julia in doctests and REPL examples** (on by default): highlight the input in `jldoctest` and `julia-repl` blocks as Julia, and mark the `julia>` prompts. Reopen open files after changing it.
 - **Docstring background** and **Docstring guide** (both on by default): the faint background behind docstring lines and the line down their left edge.
+- **Detect indentation** (on by default): when a Julia file opens, use the indentation its code blocks use (2 or 4 spaces, or tabs) for that file, if it clearly uses one; otherwise your settings apply (4 spaces by default). Only the bodies of `function`, `if`, `for` and other blocks are measured, from the syntax tree, so arguments lined up under a parenthesis and docstrings do not throw it off; module bodies are not indented by convention and are skipped. It reads at most the first 1500 lines, once per file. While the `editorconfig` package is active it is skipped, and `.editorconfig` decides. This makes a general indentation detector (such as `indent-detective`) unnecessary for Julia files.
 
 The background, guide and prompts take their colours from your syntax theme. To change them, or to style the text of docstrings (scope `meta.docstring.julia`), add rules to your stylesheet (**Edit › Stylesheet…**), for example:
 
@@ -54,6 +55,7 @@ atom-text-editor .julia-repl-prompt { color: #4c9a2a; }
 
 - `language-julia:toggle-docstrings`: fold or unfold the docstring under the cursor. Outside a docstring the key press is passed on, so it can share a key with another command.
 - `language-julia:toggle-all-docstrings`: fold every docstring in the file, or unfold them all.
+- `language-julia:detect-indentation`: detect the active file's indentation again (after pasting in a lot of code, say) and say what it found.
 
 These have no key bindings by default. For example, in your `keymap.cson`:
 
